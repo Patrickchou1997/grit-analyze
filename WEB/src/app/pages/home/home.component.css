@@ -50,7 +50,7 @@ img {
   display: flex;
   align-items: center;
   padding: 0 20px;
-  margin: 0 auto;
+  margin: 5px auto;
 }
 .alert-success {
   color: #0f5132;

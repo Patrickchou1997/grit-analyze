@@ -50,8 +50,9 @@ export class AdminComponent {
   }
 
   showAlert(message: string) {
-    this.snackBar.open(message, 'ปิด', {
-      duration: 4000 // 4 วินาทีแล้วหายไปเอง
+    this.snackBar.open(message, 'close', {
+      duration: 4000,
+      verticalPosition: 'top'
     });
   }
 

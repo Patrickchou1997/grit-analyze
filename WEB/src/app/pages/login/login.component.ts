@@ -13,6 +13,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { LoginResponse } from '../../models/login.model';
 import { environment } from '../../../environments/environment';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -32,7 +33,8 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
-    private router: Router
+    private router: Router, 
+    private snackBar: MatSnackBar
   ) {
     this.loginForm = this.fb.group({
       user_name: ['', Validators.required],
@@ -47,19 +49,28 @@ export class LoginComponent {
         .post<LoginResponse>(environment.API_URL + '/login', loginData)
         .subscribe({
           next: (response) => {
-            console.log('Login successful', response);
-            localStorage.setItem('grit_token', response.token);
-            localStorage.setItem('user_ID', response.result.user_ID);
-            localStorage.setItem('user_role', response.result.user_role);
-            localStorage.setItem('user_status', response.result.status);
-            if (response.result.user_role == 'admin') {
-              this.router.navigate(['/admin']);
+            if (response.result.status == 'approved') {
+              localStorage.setItem('grit_token', response.token);
+              localStorage.setItem('user_ID', response.result.user_ID);
+              localStorage.setItem('user_role', response.result.user_role);
+              localStorage.setItem('user_status', response.result.status);
+              if (response.result.user_role == 'admin') {
+                this.router.navigate(['/admin']);
+              } else {
+                this.router.navigate(['/home']);
+              }
             } else {
-              this.router.navigate(['/home']);
+              this.showAlert('Waiting for Administrator allow your role!')
             }
           },
           error: (error) => alert(`Login failed', ${error.error.error}`),
         });
     }
+  }
+  showAlert(message: string) {
+    this.snackBar.open(message, 'close', {
+      duration: 4000,
+      verticalPosition: 'top'
+    });
   }
 }

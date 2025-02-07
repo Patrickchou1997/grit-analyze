@@ -1,6 +1,5 @@
 import pymysql
 import datetime
-import random
 import joblib
 import pandas as pd
 import shap
@@ -33,7 +32,6 @@ app.config['JWT_ACCESS_TOKEN_EXPIRES'] = datetime.timedelta(hours=3)
 jwt = JWTManager(app)
 
 # # Register routes
-# add_home_route(app)
 add_authen_route(app)
 
 model_emp = joblib.load('models/employability_model.joblib')
@@ -231,7 +229,6 @@ def get_user():
         query = f"""SELECT user_ID,user_name,first_name,last_name,email,user_role,status,create_date 
                     FROM escape.users 
                     WHERE user_ID != '{data['user_ID']}';"""
-        print(query)
         cursor.execute(query)
         result = cursor.fetchall()
         cursor.close()
