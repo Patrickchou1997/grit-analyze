@@ -17,8 +17,12 @@
     </button>
   </section>
 </div> -->
-
-<div class="container">
+<div class="container" *ngIf="user_status != 'approved'">
+  <div class="alert alert-warning">
+    Waiting for Administrator allow your role!
+  </div>
+</div>
+<div class="container" *ngIf="user_status == 'approved'">
   <section class="sectio-1">
     <div class="title-sectio-1">
       <span style="font-size: 22px;">Approve Registered Users:</span>

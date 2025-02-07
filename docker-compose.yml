@@ -5,8 +5,13 @@ services:
     build: ./SQL
     container_name: mysql_container
     restart: always
-    env_file:
-      - .env
+    environment:
+      MYSQL_HOST: 192.168.0.33
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin1234
+      MYSQL_DATABASE: escape
+      MYSQL_PORT: 3306
     ports:
       - "3306:3306"
     volumes:
@@ -20,8 +25,15 @@ services:
     restart: always
     depends_on:
       - mysql
-    env_file:
-      - .env
+    environment:
+      MYSQL_HOST: 192.168.0.33
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin1234
+      MYSQL_DATABASE: escape
+      MYSQL_PORT: 3306
+      AI_KEY: AIzaSyDA4ouzq1JqmK44tfZ_dAunP93DzI1goKM
+      JWT_SECRET_KEY: escape_from_universe
     ports:
       - "5000:5000"
     networks:
@@ -42,6 +54,7 @@ services:
 
 volumes:
   mysql_data:
+
 
 networks:
   escape_network:

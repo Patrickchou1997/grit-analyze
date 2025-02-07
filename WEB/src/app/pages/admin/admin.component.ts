@@ -35,6 +35,7 @@ export class AdminComponent {
   isLoadingUsers: boolean = false;
   isRetraining: boolean = false;
   userId: string = localStorage.getItem('user_ID') ?? '';
+  user_status: string = localStorage.getItem('user_status') ?? '';
 
   displayedColumns: string[] = ['ID', 'Username', 'Name', 'Email', 'Role', 'Approve', 'Delete'];
   dataSource = new MatTableDataSource<User>(this.registeredUsers);

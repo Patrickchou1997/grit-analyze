@@ -51,6 +51,7 @@ export class LoginComponent {
             localStorage.setItem('grit_token', response.token);
             localStorage.setItem('user_ID', response.result.user_ID);
             localStorage.setItem('user_role', response.result.user_role);
+            localStorage.setItem('user_status', response.result.status);
             if (response.result.user_role == 'admin') {
               this.router.navigate(['/admin']);
             } else {

@@ -44,13 +44,15 @@ export class HomeComponent {
 
   readonly dialog = inject(MatDialog);
 
+  user_status: string = localStorage.getItem('user_status') ?? '';
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
     this.http
-      .get<StudentModel[]>(environment.API_URL+'/get_student')
+      .get<StudentModel[]>(environment.API_URL + '/get_student')
       .subscribe({
         next: (data) => {
           this.student_list = data;
@@ -111,7 +113,7 @@ export class HomeComponent {
     if (!this.selected_student) return;
     const payload = { student_ID: this.selected_student.student_ID };
     this.http
-      .post<GritResponse>(environment.API_URL+'/grit_home', payload)
+      .post<GritResponse>(environment.API_URL + '/grit_home', payload)
       .subscribe({
         next: (response) => {
           this.gritResponse = response;

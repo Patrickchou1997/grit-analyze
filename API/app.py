@@ -4,6 +4,7 @@ import random
 import joblib
 import pandas as pd
 import shap
+import os
 import google.generativeai as genai
 
 from routes.authen import add_authen_route
@@ -22,10 +23,10 @@ app = Flask(__name__)
 CORS(app)
 
 # Set your AI API key
-genai.configure(api_key="AIzaSyDA4ouzq1JqmK44tfZ_dAunP93DzI1goKM")
+genai.configure(api_key = os.getenv("AI_KEY", "AIzaSyDA4ouzq1JqmK44tfZ_dAunP93DzI1goKM"))
 
 # Secret key for JWT
-app.config['JWT_SECRET_KEY'] = 'escape_from_universe'
+app.config['JWT_SECRET_KEY'] = os.getenv("JWT_SECRET_KEY", 'escape_from_universe')
 app.config['JWT_ACCESS_TOKEN_EXPIRES'] = datetime.timedelta(hours=3)
 
 # Initialize JWT Manager
