@@ -1,0 +1,45 @@
+<div class="login-container">
+  <mat-card>
+    <h2 style="margin: 20px auto">Register</h2>
+    <form [formGroup]="registerForm" (ngSubmit)="register()">
+      <div class="field-row">
+        <mat-form-field appearance="fill">
+          <mat-label>First Name</mat-label>
+          <input matInput formControlName="first_name" placeholder="Enter your first name" />
+        </mat-form-field>
+        <div style="width: 10px"></div>
+        <mat-form-field appearance="fill">
+          <mat-label>Last Name</mat-label>
+          <input matInput formControlName="last_name" placeholder="Enter your last name" />
+        </mat-form-field>
+      </div>
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" placeholder="Enter your email" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Username</mat-label>
+        <input matInput formControlName="user_name" placeholder="Enter your username" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName="password" placeholder="Enter your password" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>User Role</mat-label>
+        <mat-select formControlName="user_role">
+          <mat-option value="user">User</mat-option>
+          <mat-option value="admin">Admin</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div style="width: auto; display: flex; justify-content: space-between; align-items: center;">
+        <button mat-raised-button color="primary" type="submit" [disabled]="!registerForm.valid">
+          Register
+        </button>
+        <a href="/login" style="user-select: none;">Login</a>
+      </div>
+    </form>
+  </mat-card>
+</div>

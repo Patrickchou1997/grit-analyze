@@ -1,0 +1,17 @@
+<mat-toolbar color="primary">
+    <!-- Text ที่เปลี่ยนไปตามหน้า -->
+    <span>{{ pageTitle }}</span>
+
+    <!-- ไอคอน Profile ที่ขวาสุด -->
+    <span class="spacer"></span>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>person</mat-icon>
+    </button>
+
+    <!-- เมนู Dropdown สำหรับ Logout -->
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="logout()">
+            <mat-icon>logout</mat-icon> ออกจากระบบ
+        </button>
+    </mat-menu>
+</mat-toolbar>

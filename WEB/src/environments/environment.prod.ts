@@ -1,0 +1,4 @@
+export const environment = {
+  production: false,
+  API_URL: "http://192.168.0.33:5000/api"
+};

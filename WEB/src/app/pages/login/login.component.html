@@ -1,0 +1,36 @@
+<div class="login-container">
+  <mat-card>
+    <h2 style="margin: 20px auto">Login</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <mat-form-field appearance="fill">
+        <mat-label>Username</mat-label>
+        <input
+          matInput
+          formControlName="user_name"
+          placeholder="Enter your username"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          type="password"
+          formControlName="password"
+          placeholder="Enter your password"
+        />
+      </mat-form-field>
+      <div style="display: flex; width: 100%; justify-content: space-between">
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="!loginForm.valid"
+        >
+          Login
+        </button>
+        <a href="/register" style="margin-top: 0.5rem; user-select: none;">Register</a>
+      </div>
+    </form>
+  </mat-card>
+</div>

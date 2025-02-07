@@ -1,0 +1,73 @@
+<div style="
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 25px;
+  ">
+  <h2>Student Profile</h2>
+  <button mat-button mat-dialog-close>Close</button>
+</div>
+<div style="display: flex; flex-direction: column; padding: 25px">
+  <div style="
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      width: 100%;
+    ">
+    <img *ngIf="data.gender == 'Male'" src="assets/user.png" width="200" height="200" />
+    <img *ngIf="data.gender == 'Female'" src="assets/female-user.png" width="200" height="200" />
+
+    <div style="margin: 0 20px; width: 1.5px; background-color: rgba(0, 0, 0, 0.3)"></div>
+    <div style="display: flex; flex-direction: column; width: 60%">
+      <p><strong>ID:</strong> {{ data.student_ID }}</p>
+      <p><strong>Name:</strong> {{ data.first_name }} {{ data.last_name }}</p>
+      <p>
+        <strong>Program:</strong> Bachelor of Science in Information and
+        Communication Technology (International Program)
+      </p>
+      <div style="margin: 5px 0; height: 1px; background-color: rgba(0, 0, 0, 0.3)"></div>
+
+      <div *ngIf="data.emp_opp" style="display: flex; width: 100%; padding: 10px 0">
+        <p style="margin-right: 100px">
+          <strong>Employment opportunities:</strong>
+          {{ calculateProp(data.emp_opp) }}%
+        </p>
+        <p>
+          <!-- <strong>Unemployment:</strong> {{ calculateProp(data.un_emp_opp) }}% -->
+        </p>
+      </div>
+      <div *ngIf="!data.emp_opp" style="display: flex; width: 100%; padding: 10px 0; min-height: 50px">
+        <p><strong>Employment opportunities:</strong></p>
+      </div>
+      <div style="margin: 5px 0; height: 1px; background-color: rgba(0, 0, 0, 0.3)"></div>
+      <div *ngIf="!data.grit_all" style="display: flex; width: 100%; min-height: 50px">
+        <p><strong>Grit Score:</strong></p>
+      </div>
+      <div *ngIf="data.grit_all" style="display: flex; flex-direction: column; width: 100%">
+        <p><strong>Grit Score:</strong> {{ calculate(data.grit_all) }} / 5</p>
+        <div style="display: flex; width: 100%">
+          <p style="margin-right: 100px">
+            <strong>Grit passion:</strong> {{ calculate(data.grit_passion) }} / 20
+          </p>
+          <p>
+            <strong>Grit perseverance:</strong>
+            {{ calculate(data.grit_perseverance) }} / 20
+          </p>
+        </div>
+
+        <p><strong>Counsel:</strong> {{ data.grit_analysis }}</p>
+      </div>
+      <button mat-raised-button style="width: 250px;align-self: center;" (click)="analysisGRIT(data.student_ID)">
+        <span *ngIf="!isLoadingGRIT">
+          <span *ngIf="data.grit_all; else analyze">Reanalyze Grit & Employability</span>
+          <ng-template #analyze>Analyze Grit & Employability</ng-template>
+        </span>
+        <mat-spinner *ngIf="isLoadingGRIT" diameter="24" style="display: inline-block" ></mat-spinner>
+      </button>
+
+    </div>
+  </div>
+</div>
+<!-- <mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions> -->
